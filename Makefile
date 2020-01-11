@@ -12,7 +12,7 @@ frequencymain:  $(OBJECT_FREQUENCY) frequency
 	     $(CC) $(FLAGS) -o frequency libfrequency.a 
 
 frequency_rmain: $(OBJECT_FREQUENCY_REVERSE) frequency_r
-	     $(CC) $(FLAGS) -o frequency_r  libfrequency_r.a 
+	     $(CC) $(FLAGS) -o frequency r  libfrequency_r.a 
 
 
 frequency: libfrequency.a
