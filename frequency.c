@@ -122,20 +122,24 @@ void trieFree(Node* root){
 int main(){
 	Node *head = newNode();
 	char word[WORD];
+	memset(buff,'\0',BUFFER);
+	memset(word,'\0',WORD);
 	while(fgets(buff, sizeof(buff), stdin)!=NULL){
-		int length = strlen(buff);		
-		for(int i = 0; i < length; i++){
-			if(buff[i]==' '){
-				insert(word);
+		int length = strlen(buff);	
+		for(int i = 0, j = 0 ; i < length; i++){		
+			
+			if(buff[i]==' ' || (buff[i]=='.' && i+2 == length) || (buff[i]==',' && i+2 == length)){
+				insert(head, word);
 				memset(word,'\0',WORD);
+				j = 0;
 			}
-		
+			
 
-			else if(buff[i] != ',' && buff[i] != '.'){
-				word[i] = buff[i];
+			else if(buff[i] != ',' && buff[i] != '.' && buff[i] !='\n'){
+				word[j] = buff[i];
+				j++;
 			}	
 		}
-		memset(buff,'\0',BUFFER);
 	}
 	char str[BUFFER]={'\0'};
 	int level = 0;
