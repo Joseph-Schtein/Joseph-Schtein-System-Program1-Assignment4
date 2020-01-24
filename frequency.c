@@ -118,7 +118,7 @@ void frequencyR(Node* head, char* str, int level){
 	for(int i = NUMOFLETTERS-1; i >= 0 ; i--){
 		if(head->children[i]){
 			*(str+level) = i + 'a';
-			frequency(head->children[i],str,level+1);
+			frequencyR(head->children[i],str,level+1);
 		}
 	}
 	
