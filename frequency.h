@@ -27,6 +27,8 @@ int search(Node *root,char *str);
 
 void frequency(Node* root, char* str, int level);
 
+void frequencyR(Node* root, char* str, int level);
+
 void trieFree(Node* root);
 
 #endif

@@ -103,6 +103,28 @@ void frequency(Node* head, char* str, int level){
 }
 
 
+void frequencyR(Node* head, char* str, int level){
+	
+	if(head == NULL){
+		return;
+	}
+
+	if(head->endWord){
+		str[level] = '\0';
+		printf("%s\t",str);
+		printf("%d\n", head->count);		
+	}
+
+	for(int i = NUMOFLETTERS-1; i >= 0 ; i--){
+		if(head->children[i]){
+			*(str+level) = i + 'a';
+			frequency(head->children[i],str,level+1);
+		}
+	}
+	
+}
+
+
 void trieFree(Node* root){
 
     if(root != NULL){
@@ -119,18 +141,19 @@ void trieFree(Node* root){
 }
 
 
-int main(){
+int main(int argc, char* argv[]){
+	
 	Node *head = newNode();
-	char word[WORD];
+	char word[BUFFER];
 	memset(buff,'\0',BUFFER);
-	memset(word,'\0',WORD);
+	memset(word,'\0',BUFFER);
 	while(fgets(buff, sizeof(buff), stdin)!=NULL){
 		int length = strlen(buff);	
 		for(int i = 0, j = 0 ; i < length; i++){		
 			
 			if(buff[i]==' ' || (buff[i]=='.' && i+2 == length) || (buff[i]==',' && i+2 == length)){
 				insert(head, word);
-				memset(word,'\0',WORD);
+				memset(word,'\0',BUFFER);
 				j = 0;
 			}
 			
@@ -143,7 +166,21 @@ int main(){
 	}
 	char str[BUFFER]={'\0'};
 	int level = 0;
-	frequency(head,str,level);
+	if(argc == 2){
+		int check = strcmp(argv[1], "r");
+		if(argc == 2 && check == 0){		
+			frequencyR(head,str,level);
+		}
+		else{
+			frequency(head,str,level);
+		}
+	}
+
+	
+
+	else{
+		frequency(head,str,level);
+	}
 	trieFree(head);
 	return 0 ;
 }
