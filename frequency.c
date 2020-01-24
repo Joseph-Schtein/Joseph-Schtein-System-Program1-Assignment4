@@ -149,16 +149,16 @@ int main(int argc, char* argv[]){
 	memset(word,'\0',BUFFER);
 	while(fgets(buff, sizeof(buff), stdin)!=NULL){
 		int length = strlen(buff);	
-		for(int i = 0, j = 0 ; i < length; i++){		
+		for(int i = 0, j = 0 ; i <= length; i++){		
 			
-			if(buff[i]==' ' || (buff[i]=='.' && i+2 == length) || (buff[i]==',' && i+2 == length)){
+			if(buff[i]==' ' || buff[i]=='\n' || buff[i]=='\t'){
 				insert(head, word);
 				memset(word,'\0',BUFFER);
 				j = 0;
 			}
 			
 
-			else if(buff[i] != ',' && buff[i] != '.' && buff[i] !='\n'){
+			else if((buff[i]>='a' && buff[i]<='z') || (buff[i]>='A' && buff[i]<='Z')){
 				word[j] = buff[i];
 				j++;
 			}	
